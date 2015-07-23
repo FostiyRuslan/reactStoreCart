@@ -1,18 +1,13 @@
 import events from "events";
 import AppDispatcher from "../dispatcher/AppDispatcher";
-import AppConst from "../constants/AppConst";
+import * as AppConst from "../constants/AppConst";
 
 
 class ProductStore extends events.EventEmitter {
 
 	constructor() {
 		super();
-		this._products = [{
-			title: 'Product1',
-		},
-		{
-			title: 'Product2', 
-		}];
+		this._products = [];
 	}	
 
 	emitChange() {
@@ -55,16 +50,16 @@ class ProductStore extends events.EventEmitter {
 
 var productStore = new ProductStore();
 
-AppDispatcher.register((action) => {
-	switch(action.action) {
+AppDispatcher.register(event => {	
+	switch(event.action.type) {
 		case AppConst.ADD_PRODUCT:
-			productStore.addProduct(action.product);
+			productStore.addProduct(event.action.product);
 			break;
 		case AppConst.REMOVE_PRODUCT:
-			productStore.addProduct(action.product);
+			productStore.removeProduct(event.action.product);
 			break;
 		case AppConst.UPDATE_PRODUCT:
-			productStore.updateProduct(action.product);
+			productStore.updateProduct(event.action.product);
 			break;
 		default:
 			return true;

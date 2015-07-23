@@ -1,5 +1,3 @@
-
-
 const AppConst = {
 	ADD_PRODUCT: 'addProduct',
 	REMOVE_PRODUCT: 'removeProduct',
